@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('posts', 'PostController');
-
 Auth::routes();
 
 Route::middleware('auth')
@@ -23,6 +21,7 @@ Route::middleware('auth')
     ->prefix('admin')
     ->group(function(){
         Route::get('/', 'homecontroller@index')->name('home');
+        Route::resource('posts', 'PostController');
     });
 
 
