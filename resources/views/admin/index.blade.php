@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Log-in pagina principale')
+@section('title', 'Gestione post')
 
 @section('content')
     <div class="container">
@@ -22,6 +22,7 @@
                             <td>
                                 <a href="#" class="btn btn-primary">Vedi</a>
                                 <a href="#" class="btn btn-warning">Modifica</a>
+                                <form action=""></form>
                             </td>
                         </tr>
                     @endforeach
