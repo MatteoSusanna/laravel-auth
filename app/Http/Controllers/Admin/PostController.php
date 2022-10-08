@@ -50,7 +50,7 @@ class PostController extends Controller
         $posts->fill($dati);
         $posts->save();
 
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.index')->with('status', 'Post creato con succeso');
     }
 
     /**
@@ -95,7 +95,7 @@ class PostController extends Controller
         $post->update($dati);
         $post->save();
 
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.edit', ['post', 'post'=> $post->id])->with('status', 'Post modificato con successo');
     }
 
     /**

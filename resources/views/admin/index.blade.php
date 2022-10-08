@@ -13,6 +13,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Slug</th>
+                <th scope="col">Data creation</th>
                 <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -22,6 +23,7 @@
                             <th scope="row">{{$post->id}}</th>
                             <td>{{$post->name}}</td>
                             <td>{{$post->slug}}</td>
+                            <td>{{$post->created_at}}</td>
                             <td class="d-flex">
                                 <a href="{{route('admin.posts.show', ['post' => $post->id])}}" class="btn btn-primary">Vedi</a>
                                 <a href="{{route('admin.posts.edit', ['post' => $post->id])}}" class="btn btn-warning mx-2">Modifica</a>
@@ -31,6 +33,7 @@
                                     <button type="submit" class="btn btn-danger">CANCELLA</button>
                                 </form>
                             </td>
+                            
                         </tr>
                     @endforeach
             </tbody>
