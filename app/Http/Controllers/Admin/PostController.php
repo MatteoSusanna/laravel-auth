@@ -49,6 +49,8 @@ class PostController extends Controller
         $posts = new Post();
         $posts->fill($dati);
 
+        $posts->save();
+
         //creazione slug unique
         $slug = Str::slug($posts->name . '-' . $posts->id, '-'); 
         $posts->slug = $slug;
@@ -97,6 +99,10 @@ class PostController extends Controller
         );
         $dati = $request->all();
 
+        //creazione slug unique
+        $slug = Str::slug($dati['name'] . '-' . $post['id'], '-'); 
+        $dati['slug'] = $slug;
+        
         $post->update($dati);
         $post->save();
 
