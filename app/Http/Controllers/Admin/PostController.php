@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -40,7 +41,6 @@ class PostController extends Controller
         $request->validate( [
                                 'name' => 'required|min:3|max:255',
                                 'content' => 'required|min:3|max:65000',
-                                'slug' => 'required|min:3|max:255'
                             ]
         );
 
@@ -48,8 +48,14 @@ class PostController extends Controller
 
         $posts = new Post();
         $posts->fill($dati);
-        $posts->save();
 
+        //creazione slug unique
+        $slug = Str::slug($posts->name . '-' . $posts->id, '-'); 
+        $posts->slug = $slug;
+        
+
+        $posts->save();
+        
         return redirect()->route('admin.posts.index')->with('status', 'Post creato con succeso');
     }
 
@@ -87,7 +93,6 @@ class PostController extends Controller
         $request->validate( [
                                 'name' => 'required|min:3|max:255',
                                 'content' => 'required|min:3|max:65000',
-                                'slug' => 'required|min:3|max:255'
                             ]
         );
         $dati = $request->all();
