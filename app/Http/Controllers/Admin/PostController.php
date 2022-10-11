@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Post;
@@ -27,7 +28,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.create');
+        $categories = Category::all();
+        return view('admin.create', compact('categories'));
     }
 
     /**
@@ -41,6 +43,7 @@ class PostController extends Controller
         $request->validate( [
                                 'name' => 'required|min:3|max:255',
                                 'content' => 'required|min:3|max:65000',
+                                'category_id' => 'nullable|exists:categories,id'
                             ]
         );
 
@@ -54,7 +57,6 @@ class PostController extends Controller
         //creazione slug unique
         $slug = Str::slug($posts->name . '-' . $posts->id, '-'); 
         $posts->slug = $slug;
-        
 
         $posts->save();
         
@@ -69,6 +71,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        
         return view('admin.show', compact('post'));
     }
 
@@ -80,7 +83,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.edit', compact('post'));
+        $categories = Category::all();
+        return view('admin.edit', compact('post', 'categories'));
     }
 
     /**
@@ -95,6 +99,7 @@ class PostController extends Controller
         $request->validate( [
                                 'name' => 'required|min:3|max:255',
                                 'content' => 'required|min:3|max:65000',
+                                'category_id' => 'nullable|exists:categories,id'
                             ]
         );
         $dati = $request->all();

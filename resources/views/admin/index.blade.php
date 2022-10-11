@@ -13,6 +13,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Slug</th>
+                <th scope="col">Category</th>
                 <th scope="col">Data creation</th>
                 <th scope="col">Action</th>
                 </tr>
@@ -23,6 +24,7 @@
                             <th scope="row">{{$post->id}}</th>
                             <td>{{$post->name}}</td>
                             <td>{{$post->slug}}</td>
+                            <td>{{($post->category)?$post->category->name:'-'}}</td>
                             <td>{{$post->created_at}}</td>
                             <td class="d-flex">
                                 <a href="{{route('admin.posts.show', ['post' => $post->id])}}" class="btn btn-primary">Vedi</a>
